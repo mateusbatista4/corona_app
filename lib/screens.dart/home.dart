@@ -1,12 +1,10 @@
 import 'package:corona_check/models/network.dart';
-import 'package:corona_check/screens.dart/world_page/components/country_card.dart';
-import 'package:corona_check/screens.dart/world_page/components/search_dialog.dart';
+import 'package:corona_check/screens.dart/components/search_dialog.dart';
 import 'package:corona_check/screens.dart/world_page/world_page.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sliding_sheet/sliding_sheet.dart';
 
 class Home extends StatefulWidget {
   @override

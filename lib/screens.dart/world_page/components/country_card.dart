@@ -18,11 +18,12 @@ class CountryCard extends StatelessWidget {
         height: 50,
         margin: EdgeInsets.all(6),
         child: Row(
-
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(width: 10,),
+            SizedBox(width: 0.1,),
             CircleAvatar(
               radius: 30.0,
+              
               child: Image.network(
                 country.countryInfo.flag,
                 fit: BoxFit.fill,
@@ -39,7 +40,15 @@ class CountryCard extends StatelessWidget {
               ),
               backgroundColor: Colors.transparent,
             ),
-            Text(country.country)
+            Text(
+              country.country,
+              style: TextStyle(color: Colors.black54, fontSize: 16),
+            ),
+            IconButton(
+              icon: Icon(Icons.arrow_drop_down),
+              onPressed: () {},
+              color: Colors.green[800],
+            )
           ],
         ),
       ),
