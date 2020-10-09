@@ -1,19 +1,37 @@
-import 'package:corona_check/models/country.dart';
 import 'package:corona_check/models/network.dart';
-import 'package:corona_check/screens.dart/components/country_cart.dart';
+import 'package:corona_check/screens.dart/components/country_card.dart';
 import 'package:corona_check/screens.dart/components/search_dialog.dart';
+import 'package:corona_check/screens.dart/world_page/world_page.dart';
+import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 
-import '../models/country.dart';
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
 
-class Home extends StatelessWidget {
+class _HomeState extends State<Home> {
+  int selectedIndex = 0;
+
+  
+
+  Widget content(context, Service service, int index){
+    List<Widget> widgets = [
+    WorldPage(world: service.world),
+  ];
+    return widgets[index];
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Consumer<Service>(
       builder: (_, service, __) {
         return Scaffold(
+          extendBodyBehindAppBar: true,
           appBar: AppBar(
             centerTitle: true,
             title: service.search.isEmpty
@@ -68,25 +86,42 @@ class Home extends StatelessWidget {
               )
             ],
           ),
-          body: Container(
-            child: service.countries.isEmpty
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : RefreshIndicator(
-                    onRefresh: () async {
-                      await service.getCoutriesList();
-                      await Future.delayed(Duration(seconds: 3));
-                    },
-                    child: ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(
-                          parent: BouncingScrollPhysics()),
-                      itemCount: service.filteredCountryInformationss.length,
-                      itemBuilder: (_, index) => CountryCard(
-                          country:
-                              service.filteredCountryInformationss[index]),
-                    ),
-                  ),
+          body: content(context, service, selectedIndex),
+          bottomNavigationBar: FFNavigationBar(
+            theme: FFNavigationBarTheme(
+              barBackgroundColor: Colors.white,
+              selectedItemBackgroundColor: Colors.green[800],
+              selectedItemIconColor: Colors.white,
+              selectedItemLabelColor: Colors.black,
+            ),
+            selectedIndex: selectedIndex,
+            onSelectTab: (index) {
+              setState(() {
+                selectedIndex = index;
+              });
+            },
+            items: [
+              FFNavigationBarItem(
+                iconData: Icons.public,
+                label: 'World',
+              ),
+              FFNavigationBarItem(
+                iconData: Icons.location_on,
+                label: 'Location',
+              ),
+              FFNavigationBarItem(
+                iconData: Icons.coronavirus,
+                label: 'Vaccine',
+              ),
+              FFNavigationBarItem(
+                iconData: Icons.masks,
+                label: 'Advices',
+              ),
+              FFNavigationBarItem(
+                iconData: Icons.settings,
+                label: 'Settings',
+              ),
+            ],
           ),
         );
       },

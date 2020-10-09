@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:corona_check/models/country.dart';
 import 'package:flutter/material.dart';
 
 class CountryCard extends StatelessWidget {
   const CountryCard({Key key, this.country}) : super(key: key);
   final CountryInformations country;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -17,12 +20,23 @@ class CountryCard extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-                radius: 30.0,
-                backgroundImage:
-                    NetworkImage(country.countryInfo.flag),
-                backgroundColor: Colors.transparent,
+              radius: 30.0,
+              child: Image.network(
+                country.countryInfo.flag,
+                fit: BoxFit.fill,
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Center(
+                    child: Container(
+                      margin: EdgeInsets.all(7),
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                },
               ),
-            
+              backgroundColor: Colors.transparent,
+            ),
             Text(country.country)
           ],
         ),

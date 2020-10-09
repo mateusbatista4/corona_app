@@ -1,6 +1,12 @@
 # corona_check
 
-A new Flutter project.
+Flutter application to track covid-19 globally
+
+## COVID-19 Api
+
+    - Using the following [REST API](https://corona.lmao.ninja/)
+
+    -[Tools used](https://github.com/mateusbatista4/design-tools/)
 
 ## Getting Started
 

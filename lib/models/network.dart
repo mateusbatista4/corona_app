@@ -1,17 +1,20 @@
 import 'dart:convert';
 
 import 'package:corona_check/models/country.dart';
+import 'package:corona_check/models/world.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class Service extends ChangeNotifier {
-
-  Service(){
+  Service() {
+    getWorldData();
     getCoutriesList();
   }
 
+  World world;
+
   List<CountryInformations> countries = [];
-  
+
   String _search = '';
 
   String get search => _search;
@@ -19,14 +22,12 @@ class Service extends ChangeNotifier {
   set search(String value) {
     _search = value;
     notifyListeners();
-    
   }
 
-  void setSearch(value){
+  void setSearch(value) {
     _search = value;
     notifyListeners();
   }
-
 
   List<CountryInformations> get filteredCountryInformationss {
     List<CountryInformations> filteredCountryInformationss = [];
@@ -35,33 +36,42 @@ class Service extends ChangeNotifier {
     } else {
       filteredCountryInformationss.addAll(
         countries.where(
-          (c) => c.country.toLowerCase().contains(search.toLowerCase(),),
+          (c) => c.country.toLowerCase().contains(
+                search.toLowerCase(),
+              ),
         ),
       );
     }
-    
+
     return filteredCountryInformationss;
-    
   }
 
-  Future<void> getCoutriesList() async {
-    _getAPI().then(
+  Future<void> getWorldData() async {
+    _getAPI('https://disease.sh/v3/covid-19/all').then(
       (value) {
         var data = jsonDecode(value);
-       print(data);
-        for (var item in data) {
-          countries.add(CountryInformations.fromJson(item));
-        }
         
+        world = World.fromJson(data);
+      
         notifyListeners();
       },
-      
     );
   }
 
-  Future<String> _getAPI() async {
-    String url = 'https://corona.lmao.ninja/v3/covid-19/countries/';
+  Future<void> getCoutriesList() async {
+    _getAPI('https://corona.lmao.ninja/v3/covid-19/countries/').then(
+      (value) {
+        var data = jsonDecode(value);
+        for (var item in data) {
+          countries.add(CountryInformations.fromJson(item));
+        }
 
+        notifyListeners();
+      },
+    );
+  }
+
+  Future<String> _getAPI(String url) async {
     http.Response reponse = await http.get(Uri.encodeFull(url));
     return reponse.body;
   }

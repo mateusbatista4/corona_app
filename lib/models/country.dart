@@ -49,9 +49,9 @@ class CountryInformations {
       this.criticalPerOneMillion});
 
   CountryInformations.fromJson(Map<String, dynamic> json) {
-    print(json);
+    
     updated = json['updated'];
-    print("aq");
+    
     country = json['country'];
     countryInfo = CountryInfo.fromJson(json['countryInfo']);
         
