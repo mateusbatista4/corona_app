@@ -2,11 +2,13 @@
 
 Flutter application to track covid-19 globally
 
+<img src="https://github.com/mateusbatista4/corona_app/blob/master/screenshots/Screenshot_20201009-155019.jpg" width="200"> <img src="https://github.com/mateusbatista4/corona_app/blob/master/screenshots/Screenshot_20201009-155727.jpg" width="200">
+
 ## COVID-19 Api
 
-    - Using the following [REST API](https://corona.lmao.ninja/)
+- Using the following [REST API](https://corona.lmao.ninja/)
 
-    -[Tools used](https://github.com/mateusbatista4/design-tools/)
+- [Tools used](https://github.com/mateusbatista4/design-tools/)
 
 ## Getting Started
 
