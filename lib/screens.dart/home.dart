@@ -1,6 +1,6 @@
 import 'package:corona_check/models/network.dart';
-import 'package:corona_check/screens.dart/components/country_card.dart';
-import 'package:corona_check/screens.dart/components/search_dialog.dart';
+import 'package:corona_check/screens.dart/world_page/components/country_card.dart';
+import 'package:corona_check/screens.dart/world_page/components/search_dialog.dart';
 import 'package:corona_check/screens.dart/world_page/world_page.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 
@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
 
   Widget content(context, Service service, int index){
     List<Widget> widgets = [
-    WorldPage(world: service.world),
+    WorldPage(service: service),
   ];
     return widgets[index];
   }

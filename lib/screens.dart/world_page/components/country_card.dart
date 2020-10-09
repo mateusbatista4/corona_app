@@ -12,13 +12,15 @@ class CountryCard extends StatelessWidget {
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(15.0),
       ),
       child: Container(
         height: 50,
         margin: EdgeInsets.all(6),
         child: Row(
+
           children: [
+            SizedBox(width: 10,),
             CircleAvatar(
               radius: 30.0,
               child: Image.network(
