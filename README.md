@@ -2,8 +2,9 @@
 
 Flutter application to track covid-19 globally
 
-![HomePage](https://github.com/mateusbatista4/corona_app/blob/master/screenshots/Screenshot_20201009-155019.jpg)
-![Countries List](https://github.com/mateusbatista4/corona_app/blob/master/screenshots/Screenshot_20201009-155727.jpg)
+![HomePage](https://github.com/mateusbatista4/corona_app/blob/master/screenshots/Screenshot_20201009-155019.jpg =100x20)
+
+![Countries List](https://github.com/mateusbatista4/corona_app/blob/master/screenshots/Screenshot_20201009-155727.jpg =100x20)
 
 ## COVID-19 Api
 
