@@ -1,9 +1,9 @@
-import 'package:corona_check/models/countrie.dart';
+import 'package:corona_check/models/country.dart';
 import 'package:flutter/material.dart';
 
-class CountrieCard extends StatelessWidget {
-  const CountrieCard({Key key, this.countrie}) : super(key: key);
-  final CountrieInformations countrie;
+class CountryCard extends StatelessWidget {
+  const CountryCard({Key key, this.country}) : super(key: key);
+  final CountryInformations country;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,11 +19,11 @@ class CountrieCard extends StatelessWidget {
             CircleAvatar(
                 radius: 30.0,
                 backgroundImage:
-                    NetworkImage(countrie.countryInfo.flag),
+                    NetworkImage(country.countryInfo.flag),
                 backgroundColor: Colors.transparent,
               ),
             
-            Text(countrie.country)
+            Text(country.country)
           ],
         ),
       ),

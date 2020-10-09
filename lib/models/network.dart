@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:corona_check/models/countrie.dart';
+import 'package:corona_check/models/country.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,7 +10,7 @@ class Service extends ChangeNotifier {
     getCoutriesList();
   }
 
-  List<CountrieInformations> countries = [];
+  List<CountryInformations> countries = [];
   
   String _search = '';
 
@@ -28,19 +28,19 @@ class Service extends ChangeNotifier {
   }
 
 
-  List<CountrieInformations> get filteredCountrieInformationss {
-    List<CountrieInformations> filteredCountrieInformationss = [];
+  List<CountryInformations> get filteredCountryInformationss {
+    List<CountryInformations> filteredCountryInformationss = [];
     if (search.isEmpty) {
-      filteredCountrieInformationss.addAll(countries);
+      filteredCountryInformationss.addAll(countries);
     } else {
-      filteredCountrieInformationss.addAll(
+      filteredCountryInformationss.addAll(
         countries.where(
           (c) => c.country.toLowerCase().contains(search.toLowerCase(),),
         ),
       );
     }
     
-    return filteredCountrieInformationss;
+    return filteredCountryInformationss;
     
   }
 
@@ -50,7 +50,7 @@ class Service extends ChangeNotifier {
         var data = jsonDecode(value);
        print(data);
         for (var item in data) {
-          countries.add(CountrieInformations.fromJson(item));
+          countries.add(CountryInformations.fromJson(item));
         }
         
         notifyListeners();

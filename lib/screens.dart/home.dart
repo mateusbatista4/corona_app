@@ -1,12 +1,12 @@
-import 'package:corona_check/models/countrie.dart';
+import 'package:corona_check/models/country.dart';
 import 'package:corona_check/models/network.dart';
-import 'package:corona_check/screens.dart/components/countrie_cart.dart';
+import 'package:corona_check/screens.dart/components/country_cart.dart';
 import 'package:corona_check/screens.dart/components/search_dialog.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/countrie.dart';
+import '../models/country.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -81,10 +81,10 @@ class Home extends StatelessWidget {
                     child: ListView.builder(
                       physics: AlwaysScrollableScrollPhysics(
                           parent: BouncingScrollPhysics()),
-                      itemCount: service.filteredCountrieInformationss.length,
-                      itemBuilder: (_, index) => CountrieCard(
-                          countrie:
-                              service.filteredCountrieInformationss[index]),
+                      itemCount: service.filteredCountryInformationss.length,
+                      itemBuilder: (_, index) => CountryCard(
+                          country:
+                              service.filteredCountryInformationss[index]),
                     ),
                   ),
           ),

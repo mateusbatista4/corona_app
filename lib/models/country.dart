@@ -1,4 +1,4 @@
-class CountrieInformations {
+class CountryInformations {
   num updated;
   String country;
   CountryInfo countryInfo;
@@ -23,7 +23,7 @@ class CountrieInformations {
   num recoveredPerOneMillion;
   num criticalPerOneMillion;
 
-  CountrieInformations(
+  CountryInformations(
       {this.updated,
       this.country,
       this.countryInfo,
@@ -48,7 +48,7 @@ class CountrieInformations {
       this.recoveredPerOneMillion,
       this.criticalPerOneMillion});
 
-  CountrieInformations.fromJson(Map<String, dynamic> json) {
+  CountryInformations.fromJson(Map<String, dynamic> json) {
     print(json);
     updated = json['updated'];
     print("aq");
