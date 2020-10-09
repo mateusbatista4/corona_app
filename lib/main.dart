@@ -1,55 +1,31 @@
-import 'dart:convert';
-import 'dart:html';
-
-import 'package:corona_check/models/country.dart';
+import 'package:corona_check/models/network.dart';
 import 'package:flutter/material.dart';
-import './home.dart';
-import './network.dart';
+import 'package:provider/provider.dart';
+import 'screens.dart/home.dart';
 
 main(List<String> args) {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  List<dynamic> lista = new List();
-
-  void atualize()async{
-    
-      Service.getAPI().then((onValue){
-        List<dynamic> data = jsonDecode(onValue);
-        setState(() {
-          data.forEach((val){
-              
-              lista.add(CountryInformations.fromJson(val));
-          });
-        });
-      });
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      color: Colors.green,
-      theme: ThemeData(appBarTheme: AppBarTheme(color: Colors.green[800])),
-      home: Scaffold(
-        appBar:AppBar(
-          centerTitle: true,
-          title: Text("COVID Check"),
-          actions: <Widget>[
-            IconButton(icon: Icon(Icons.autorenew,color: Colors.white), onPressed: atualize,)  
-            ], 
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => Service(),
+          lazy: false,
         ),
-        body: Home(foo: lista,)
-          
-      )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        color: Colors.green,
+        title: "Corona App",
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(color: Colors.green[800]),
+        ),
+        home: Home(),
+      ),
     );
   }
 }
