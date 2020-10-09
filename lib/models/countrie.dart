@@ -53,9 +53,8 @@ class CountrieInformations {
     updated = json['updated'];
     print("aq");
     country = json['country'];
-    // countryInfo = json['countryInfo'] != null
-    //     ? new CountryInfo.fromJson(json['countryInfo'])
-    //     : null;
+    countryInfo = CountryInfo.fromJson(json['countryInfo']);
+        
     cases = json['cases'];
     todayCases = json['todayCases'];
     deaths = json['deaths'];
@@ -82,11 +81,11 @@ class CountrieInformations {
 }
 
 class CountryInfo {
-  int iId;
+  num iId;
   String iso2;
   String iso3;
-  int lat;
-  int long;
+  num lat;
+  num long;
   String flag;
 
   CountryInfo({this.iId, this.iso2, this.iso3, this.lat, this.long, this.flag});
@@ -100,14 +99,5 @@ class CountryInfo {
     flag = json['flag'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.iId;
-    data['iso2'] = this.iso2;
-    data['iso3'] = this.iso3;
-    data['lat'] = this.lat;
-    data['long'] = this.long;
-    data['flag'] = this.flag;
-    return data;
-  }
+  
 }

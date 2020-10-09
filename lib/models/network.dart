@@ -10,10 +10,42 @@ class Service extends ChangeNotifier {
     getCoutriesList();
   }
 
-  List<CountrieInformations> countries = new List();
+  List<CountrieInformations> countries = [];
+  
+  String _search = '';
+
+  String get search => _search;
+
+  set search(String value) {
+    _search = value;
+    notifyListeners();
+    
+  }
+
+  void setSearch(value){
+    _search = value;
+    notifyListeners();
+  }
+
+
+  List<CountrieInformations> get filteredCountrieInformationss {
+    List<CountrieInformations> filteredCountrieInformationss = [];
+    if (search.isEmpty) {
+      filteredCountrieInformationss.addAll(countries);
+    } else {
+      filteredCountrieInformationss.addAll(
+        countries.where(
+          (c) => c.country.toLowerCase().contains(search.toLowerCase(),),
+        ),
+      );
+    }
+    
+    return filteredCountrieInformationss;
+    
+  }
 
   Future<void> getCoutriesList() async {
-    getAPI().then(
+    _getAPI().then(
       (value) {
         var data = jsonDecode(value);
        print(data);
@@ -27,7 +59,7 @@ class Service extends ChangeNotifier {
     );
   }
 
-  Future<String> getAPI() async {
+  Future<String> _getAPI() async {
     String url = 'https://corona.lmao.ninja/v3/covid-19/countries/';
 
     http.Response reponse = await http.get(Uri.encodeFull(url));
