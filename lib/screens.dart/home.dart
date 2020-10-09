@@ -1,5 +1,6 @@
 import 'package:corona_check/models/network.dart';
 import 'package:corona_check/screens.dart/components/search_dialog.dart';
+import 'package:corona_check/screens.dart/vaccine_page/vaccine_page.dart';
 import 'package:corona_check/screens.dart/world_page/world_page.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 
@@ -19,6 +20,10 @@ class _HomeState extends State<Home> {
   Widget content(context, Service service, int index){
     List<Widget> widgets = [
     WorldPage(service: service),
+    Container(),
+    VaccinePage(vaccine: service.vaccineData),
+    Container(),
+    Container(),
   ];
     return widgets[index];
   }

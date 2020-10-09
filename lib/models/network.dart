@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:corona_check/models/country.dart';
+import 'package:corona_check/models/vaccine.dart';
 import 'package:corona_check/models/world.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -8,10 +10,14 @@ import 'package:http/http.dart' as http;
 class Service extends ChangeNotifier {
   Service() {
     getWorldData();
+    getVaccineData();
     getCoutriesList();
+    
   }
 
   World world;
+
+  VaccineStatus vaccineData;
 
   List<CountryInformations> countries = [];
 
@@ -50,12 +56,18 @@ class Service extends ChangeNotifier {
     _getAPI('https://disease.sh/v3/covid-19/all').then(
       (value) {
         var data = jsonDecode(value);
-        
         world = World.fromJson(data);
-      
         notifyListeners();
       },
     );
+  }
+
+  Future<void> getVaccineData() async {
+    _getAPI('https://disease.sh/v3/covid-19/vaccine').then((value) {
+      var data = jsonDecode(value);
+      vaccineData = VaccineStatus.fromJson(data);
+      notifyListeners();
+    });
   }
 
   Future<void> getCoutriesList() async {
@@ -65,7 +77,6 @@ class Service extends ChangeNotifier {
         for (var item in data) {
           countries.add(CountryInformations.fromJson(item));
         }
-
         notifyListeners();
       },
     );
